@@ -4,6 +4,7 @@ import base64
 import logging
 import os
 import signal
+import sys
 import threading
 import time
 import urllib.error
@@ -81,6 +82,7 @@ class GrafanaPusher:
 
 def main() -> None:
     logging.basicConfig(
+        stream=sys.stdout,
         level=env("LOG_LEVEL", "INFO"),
         format="%(asctime)s %(levelname)s %(message)s",
     )
