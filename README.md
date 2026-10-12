@@ -83,12 +83,47 @@ All metrics have the `deye_` prefix and the `site` label. Examples:
 
 For the full list, see `registers.py`.
 
-## Alert ideas (Grafana Alerting)
+## Battery alerts (Telegram)
+
+The script `grafana/setup_alerts.py` creates the battery alerts in Grafana Cloud. It sends the notifications to Telegram.
+You can run the script again. It updates the existing objects.
+
+1. Set `GRAFANA_URL`, `GRAFANA_SA_TOKEN`, `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in `.env`. See `.env.example`.
+2. Run the script:
+
+   ```sh
+   uv run --env-file .env python grafana/setup_alerts.py
+   ```
+
+The script creates these objects:
+
+- The folder `Deye` with the rule group `battery`. The group has 4 rules:
+
+  | Rule | Fires when | Severity |
+  |---|---|---|
+  | Работаем на батарее | SOC < 100% for 5m | discharge |
+  | Батарея ниже 75% | SOC < 75% for 1m | info |
+  | Батарея ниже 50% | SOC < 50% for 1m | warning |
+  | Батарея ниже 25% | SOC < 25% for 1m | critical |
+
+  A rule recovers only when SOC is 100%.
+- The contact point `Deye Telegram` and the message template `deye`.
+- One child notification policy for the label `deye=battery`. The script does not change other policies.
+
+All rules are in one notification group. Each new level sends one message, and full recovery sends one message:
+
+```
+🔋 Работаем на батарее 99% · home
+🔵 INFO · home / Заряд батареи: 74% (ниже 75%)
+✅ Батарея заряжена на 100% · home
+```
+
+To change the thresholds or the messages, edit `LEVELS` or `MESSAGE_TEMPLATE` in the script. Then run the script again.
+
+## Other alert ideas
 
 | Alert | Query | Pending period |
 |---|---|---|
-| Low battery | `deye_battery_soc_percent < 20` | 2m |
 | Grid down | `deye_grid_up == 0` | 1m |
-| Grid restored | `deye_grid_up == 1` (or use the "resolved" notification of "Grid down") | 1m |
 | Inverter unreachable | `deye_up == 0` | 5m |
 | No data (collector or internet down) | `absent_over_time(deye_up[5m])` | 0m |
