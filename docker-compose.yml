@@ -1,0 +1,7 @@
+services:
+  deye-collector:
+    image: temak/deye-collector:latest
+    build: .
+    container_name: deye-collector
+    env_file: .env
+    restart: unless-stopped
