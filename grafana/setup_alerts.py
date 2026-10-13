@@ -21,8 +21,6 @@ ROUTE_MATCHER = ["deye", "=", "battery"]
 # (fire below this SOC %, severity, rule title, pending period).
 # Every level recovers only when SOC is above RECOVER_ABOVE.
 LEVELS = [
-    # Longer pending period: SOC can briefly dip to 99% while the battery floats on grid.
-    (100, "discharge", "Работаем на батарее", "5m"),
     (75, "info", "Батарея ниже 75%", "1m"),
     (50, "warning", "Батарея ниже 50%", "1m"),
     (25, "critical", "Батарея ниже 25%", "1m"),
@@ -33,16 +31,10 @@ MESSAGE_TEMPLATE = """{{ define "deye.message" -}}
 {{- if .Alerts.Firing -}}
 {{- $top := index .Alerts.Firing 0 -}}
 {{- range .Alerts.Firing -}}
-{{- if eq .Labels.severity "critical" }}{{ $top = . }}
-{{- else if and (eq .Labels.severity "warning") (ne $top.Labels.severity "critical") }}{{ $top = . }}
-{{- else if and (eq .Labels.severity "info") (eq $top.Labels.severity "discharge") }}{{ $top = . }}{{ end -}}
+{{- if eq .Labels.severity "critical" }}{{ $top = . }}{{ else if and (eq .Labels.severity "warning") (ne $top.Labels.severity "critical") }}{{ $top = . }}{{ end -}}
 {{- end -}}
-{{- if eq $top.Labels.severity "discharge" -}}
-🔋 Работаем на батарее <b>{{ $top.Annotations.soc }}%</b> · {{ $top.Labels.site }}
-{{- else -}}
 {{- if eq $top.Labels.severity "critical" }}🔴 <b>CRITICAL</b>{{ else if eq $top.Labels.severity "warning" }}🟠 <b>WARNING</b>{{ else }}🔵 <b>INFO</b>{{ end }} · {{ $top.Labels.site }}
 Заряд батареи: <b>{{ $top.Annotations.soc }}%</b> (ниже {{ $top.Annotations.threshold }}%)
-{{- end -}}
 {{- else -}}
 ✅ Батарея заряжена на <b>100%</b> · {{ .CommonLabels.site }}
 {{- end }}

@@ -1,6 +1,6 @@
 {
   "title": "Deye инвертор",
-  "uid": "deye-inverter",
+  "uid": "deye-inverter-public",
   "tags": [
     "deye",
     "solar"
@@ -10,39 +10,11 @@
   "schemaVersion": 39,
   "editable": true,
   "time": {
-    "from": "now-24h",
+    "from": "now-3h",
     "to": "now"
   },
   "templating": {
-    "list": [
-      {
-        "name": "ds",
-        "label": "Источник",
-        "type": "datasource",
-        "query": "prometheus",
-        "current": {},
-        "hide": 0
-      },
-      {
-        "name": "site",
-        "label": "Объект",
-        "type": "query",
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${ds}"
-        },
-        "query": {
-          "query": "label_values(deye_up, site)",
-          "refId": "site"
-        },
-        "definition": "label_values(deye_up, site)",
-        "refresh": 2,
-        "includeAll": true,
-        "multi": false,
-        "current": {},
-        "hide": 0
-      }
-    ]
+    "list": []
   },
   "panels": [
     {
@@ -51,7 +23,7 @@
       "title": "Заряд батареи",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 0,
@@ -63,10 +35,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_battery_soc_percent{site=~\"$site\"}",
+          "expr": "deye_battery_soc_percent",
           "legendFormat": "__auto",
           "instant": true,
           "range": false
@@ -117,7 +89,7 @@
       "title": "Сеть",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 4,
@@ -129,10 +101,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_grid_up{site=~\"$site\"}",
+          "expr": "deye_grid_up",
           "legendFormat": "__auto",
           "instant": false,
           "range": true
@@ -196,7 +168,7 @@
       "title": "Батарея",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 8,
@@ -208,10 +180,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_battery_power_w{site=~\"$site\"}",
+          "expr": "deye_battery_power_w",
           "legendFormat": "__auto",
           "instant": false,
           "range": true
@@ -260,7 +232,7 @@
       "title": "Нагрузка",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 12,
@@ -272,10 +244,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_load_power_w{site=~\"$site\"}",
+          "expr": "deye_load_power_w",
           "legendFormat": "__auto",
           "instant": false,
           "range": true
@@ -311,7 +283,7 @@
       "title": "Солнце",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 16,
@@ -323,10 +295,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_pv_power_w{site=~\"$site\"}",
+          "expr": "deye_pv_power_w",
           "legendFormat": "__auto",
           "instant": false,
           "range": true
@@ -362,7 +334,7 @@
       "title": "Связь с инвертором",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 20,
@@ -374,10 +346,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_up{site=~\"$site\"}",
+          "expr": "deye_up",
           "legendFormat": "__auto",
           "instant": false,
           "range": true
@@ -443,7 +415,7 @@
       "title": "Заряд батареи",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 0,
@@ -455,10 +427,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_battery_soc_percent{site=~\"$site\"}",
+          "expr": "deye_battery_soc_percent",
           "legendFormat": "SOC",
           "instant": false,
           "range": true
@@ -520,7 +492,7 @@
       "title": "Мощности",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 12,
@@ -532,10 +504,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_load_power_w{site=~\"$site\"}",
+          "expr": "deye_load_power_w",
           "legendFormat": "Нагрузка",
           "instant": false,
           "range": true
@@ -543,10 +515,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "B",
-          "expr": "deye_battery_power_w{site=~\"$site\"}",
+          "expr": "deye_battery_power_w",
           "legendFormat": "Батарея (+разряд / −заряд)",
           "instant": false,
           "range": true
@@ -554,10 +526,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "C",
-          "expr": "deye_grid_power_w{site=~\"$site\"}",
+          "expr": "deye_grid_power_w",
           "legendFormat": "Сеть (+импорт / −экспорт)",
           "instant": false,
           "range": true
@@ -565,10 +537,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "D",
-          "expr": "deye_pv_power_w{site=~\"$site\"}",
+          "expr": "deye_pv_power_w",
           "legendFormat": "Солнце",
           "instant": false,
           "range": true
@@ -604,7 +576,7 @@
       "title": "Наличие сети",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 0,
@@ -616,10 +588,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_grid_up{site=~\"$site\"}",
+          "expr": "deye_grid_up",
           "legendFormat": "Сеть",
           "instant": false,
           "range": true
@@ -685,7 +657,7 @@
       "title": "Напряжение сети / нагрузки",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 0,
@@ -697,10 +669,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_grid_voltage_v{site=~\"$site\"}",
+          "expr": "deye_grid_voltage_v",
           "legendFormat": "Сеть",
           "instant": false,
           "range": true
@@ -708,10 +680,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "B",
-          "expr": "deye_load_voltage_v{site=~\"$site\"}",
+          "expr": "deye_load_voltage_v",
           "legendFormat": "Нагрузка",
           "instant": false,
           "range": true
@@ -747,7 +719,7 @@
       "title": "Батарея: напряжение",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 8,
@@ -759,10 +731,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_battery_voltage_v{site=~\"$site\"}",
+          "expr": "deye_battery_voltage_v",
           "legendFormat": "Напряжение",
           "instant": false,
           "range": true
@@ -798,7 +770,7 @@
       "title": "Температуры",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 16,
@@ -810,10 +782,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_battery_temp_c{site=~\"$site\"}",
+          "expr": "deye_battery_temp_c",
           "legendFormat": "Батарея",
           "instant": false,
           "range": true
@@ -821,10 +793,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "B",
-          "expr": "deye_dc_temp_c{site=~\"$site\"}",
+          "expr": "deye_dc_temp_c",
           "legendFormat": "DC",
           "instant": false,
           "range": true
@@ -832,10 +804,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "C",
-          "expr": "deye_radiator_temp_c{site=~\"$site\"}",
+          "expr": "deye_radiator_temp_c",
           "legendFormat": "Радиатор",
           "instant": false,
           "range": true
@@ -871,7 +843,7 @@
       "title": "Энергия за сегодня",
       "datasource": {
         "type": "prometheus",
-        "uid": "${ds}"
+        "uid": "grafanacloud-prom"
       },
       "gridPos": {
         "x": 0,
@@ -883,10 +855,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_pv_today_kwh{site=~\"$site\"}",
+          "expr": "deye_pv_today_kwh",
           "legendFormat": "Солнце",
           "instant": true,
           "range": false
@@ -894,10 +866,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "B",
-          "expr": "deye_load_today_kwh{site=~\"$site\"}",
+          "expr": "deye_load_today_kwh",
           "legendFormat": "Потребление",
           "instant": true,
           "range": false
@@ -905,10 +877,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "C",
-          "expr": "deye_grid_import_today_kwh{site=~\"$site\"}",
+          "expr": "deye_grid_import_today_kwh",
           "legendFormat": "Из сети",
           "instant": true,
           "range": false
@@ -916,10 +888,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "D",
-          "expr": "deye_grid_export_today_kwh{site=~\"$site\"}",
+          "expr": "deye_grid_export_today_kwh",
           "legendFormat": "В сеть",
           "instant": true,
           "range": false
@@ -927,10 +899,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "E",
-          "expr": "deye_battery_charge_today_kwh{site=~\"$site\"}",
+          "expr": "deye_battery_charge_today_kwh",
           "legendFormat": "Заряд батареи",
           "instant": true,
           "range": false
@@ -938,10 +910,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${ds}"
+            "uid": "grafanacloud-prom"
           },
           "refId": "F",
-          "expr": "deye_battery_discharge_today_kwh{site=~\"$site\"}",
+          "expr": "deye_battery_discharge_today_kwh",
           "legendFormat": "Разряд батареи",
           "instant": true,
           "range": false

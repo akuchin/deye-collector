@@ -97,11 +97,10 @@ You can run the script again. It updates the existing objects.
 
 The script creates these objects:
 
-- The folder `Deye` with the rule group `battery`. The group has 4 rules:
+- The folder `Deye` with the rule group `battery`. The group has 3 rules:
 
   | Rule | Fires when | Severity |
   |---|---|---|
-  | Работаем на батарее | SOC < 100% for 5m | discharge |
   | Батарея ниже 75% | SOC < 75% for 1m | info |
   | Батарея ниже 50% | SOC < 50% for 1m | warning |
   | Батарея ниже 25% | SOC < 25% for 1m | critical |
@@ -113,7 +112,6 @@ The script creates these objects:
 All rules are in one notification group. Each new level sends one message, and full recovery sends one message:
 
 ```
-🔋 Работаем на батарее 99% · home
 🔵 INFO · home / Заряд батареи: 74% (ниже 75%)
 ✅ Батарея заряжена на 100% · home
 ```
