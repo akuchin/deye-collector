@@ -1,6 +1,6 @@
 {
   "title": "Deye инвертор",
-  "uid": "deye-inverter-public",
+  "uid": "deye-inverter",
   "tags": [
     "deye",
     "solar"
@@ -280,7 +280,7 @@
     {
       "id": 5,
       "type": "stat",
-      "title": "Солнце",
+      "title": "Генератор",
       "datasource": {
         "type": "prometheus",
         "uid": "grafanacloud-prom"
@@ -298,7 +298,7 @@
             "uid": "grafanacloud-prom"
           },
           "refId": "A",
-          "expr": "deye_pv_power_w",
+          "expr": "deye_gen_power_w",
           "legendFormat": "__auto",
           "instant": false,
           "range": true
@@ -309,7 +309,7 @@
           "unit": "watt",
           "color": {
             "mode": "fixed",
-            "fixedColor": "yellow"
+            "fixedColor": "orange"
           }
         },
         "overrides": []
