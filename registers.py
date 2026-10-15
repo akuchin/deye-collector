@@ -36,6 +36,7 @@ REGISTERS = [
     Reg("grid_voltage_v", 150, 0.1),
     Reg("inverter_voltage_v", 154, 0.1),
     Reg("load_voltage_v", 157, 0.1),
+    Reg("gen_power_w", 166, signed=True),  # GEN port (generator) power
     Reg("grid_power_w", 169, signed=True),  # + import from grid, - export
     Reg("inverter_power_w", 175, signed=True),
     Reg("load_power_w", 178),

@@ -79,6 +79,7 @@ All metrics have the `deye_` prefix and the `site` label. Examples:
 | `deye_grid_voltage_v`, `deye_grid_power_w` | Grid voltage and grid power (positive = import) |
 | `deye_load_power_w` | Load power |
 | `deye_pv_power_w` | Solar power (PV1 + PV2) |
+| `deye_gen_power_w` | Generator power on the GEN port |
 | `deye_*_today_kwh` | Daily energy counters |
 
 For the full list, see `registers.py`.

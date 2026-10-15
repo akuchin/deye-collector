@@ -544,6 +544,17 @@
           "legendFormat": "Солнце",
           "instant": false,
           "range": true
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "refId": "E",
+          "expr": "deye_gen_power_w",
+          "legendFormat": "Генератор",
+          "instant": false,
+          "range": true
         }
       ],
       "fieldConfig": {
